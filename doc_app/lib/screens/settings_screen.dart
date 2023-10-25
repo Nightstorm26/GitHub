@@ -1,7 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:doc_app/auth.dart';
 
 class SettingScreen extends StatelessWidget {
+
+  final Auth _auth = Auth();  // Create an instance of your Auth class
+
+  void _handleSignOut() async {
+    try {
+      await _auth.signOut();
+      // If successful, navigate to the login screen or do other actions.
+    } catch (e) {
+      // Handle sign-out errors (e.g., show an error message).
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -152,25 +165,30 @@ class SettingScreen extends StatelessWidget {
             trailing: Icon(Icons.arrow_forward_ios_rounded),
           ),
           Divider(height: 40),
-          ListTile(
-            onTap: () {},
-            leading: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.redAccent.shade100,
-                shape: BoxShape.circle,
+          ElevatedButton(
+            onPressed: () {
+              _handleSignOut();
+            },
+            child: ListTile(
+              onTap: () {},
+              leading: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent.shade100,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.redAccent,
+                  size: 35,
+                ),
               ),
-              child: Icon(
-                Icons.info_outline_rounded,
-                color: Colors.redAccent,
-                size: 35,
-              ),
-            ),
-            title: Text(
-              "Log Out",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
+              title: Text(
+                "Log Out",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
